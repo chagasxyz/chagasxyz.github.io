@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chagas & Alarcon - Playlist de Memórias</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Fontes do Google: Montserrat (estilo Spotify), Inter (legibilidade) e Meow Script (romântico) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Meow+Script&family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fundo de degradê no topo -->
+    <div class="topo"></div>
+
+    <div class="app-container">
+        <!-- HEADER ESTILO PLAYLIST SPOTIFY -->
+        <header class="playlist-header">
+            <div class="cover-wrapper">
+                <img class="foto_inicial" src="Foto1.jpeg" alt="Foto do Casal">
+            </div>
+            <div class="playlist-details">
+                <span class="playlist-badge">PLAYLIST PÚBLICA</span>
+                <h1 class="playlist-title">Chagas & Alarcon</h1>
+                <p class="playlist-description">
+                    Bom meu amor, espero que através desse site você possa perceber o quão grande é meu amor por você, e saiba... isso não é nem 1% dele. 💚
+                </p>
+                <div class="playlist-meta">
+                    <img src="icon.png" class="author-avatar" alt="Chagas">
+                    <span class="author-name">Chagas</span>
+                    <span class="meta-separator">•</span>
+                    <span class="songs-count" id="totalMemorias">35 memórias 💚</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- BARRA DE AÇÕES (PLAY, FAVORITAR, CRONÔMETRO) -->
+        <div class="spotify-actions">
+            <!-- Botão Play Principal -->
+            <button id="mainPlayBtn" class="action-btn-play" aria-label="Tocar Playlist">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="black">
+                    <polygon points="8,5 19,12 8,19" id="playIconSvg"></polygon>
+                    <rect x="6" y="5" width="4" height="14" fill="black" class="pause-bar hidden" id="pauseBar1"></rect>
+                    <rect x="14" y="5" width="4" height="14" fill="black" class="pause-bar hidden" id="pauseBar2"></rect>
+                </svg>
+            </button>
+            
+            <!-- Botão de Curtir / Favorito -->
+            <div class="action-container" id="btn">
+                <button class="action-btn-heart" aria-label="Adicionar aos Favoritos">
+                    <img src="favorite.png" alt="Favorito" class="heart-img">
+                </button>
+                <div id="msg" class="mensagem">
+                    Te amar sempre foi meu sentimento favorito 💚
+                </div>
+            </div>
+
+            <!-- Botão de Cronômetro -->
+            <div class="action-container" id="timeBtn">
+                <button class="action-btn-time" aria-label="Ir para Nossa História">
+                    <img src="time.svg" alt="Cronômetro" class="time-img">
+                </button>
+            </div>
+        </div>
+
+        <!-- SEÇÃO DO CONTADOR: NOSSA HISTÓRIA -->
+        <section id="contador-section" class="contador-section">
+            <h2 class="section-title">Nossa História ❤️</h2>
+            
+            <div class="contador-card">
+                <div class="contador-foto-container">
+                    <img src="Foto2.jpg" class="contador-foto" alt="Nossa Foto">
+                </div>
+                <div class="contador-box">
+                    <h3>Estamos juntos há</h3>
+                    <div class="contador-grid">
+                        <div class="time-card">
+                            <span id="anos">0</span>
+                            <small>Anos</small>
+                        </div>
+                        <div class="time-card">
+                            <span id="meses">0</span>
+                            <small>Meses</small>
+                        </div>
+                        <div class="time-card">
+                            <span id="dias">0</span>
+                            <small>Dias</small>
+                        </div>
+                        <div class="time-card">
+                            <span id="horas">0</span>
+                            <small>Horas</small>
+                        </div>
+                        <div class="time-card">
+                            <span id="minutos">0</span>
+                            <small>Minutos</small>
+                        </div>
+                        <div class="time-card">
+                            <span id="segundos">0</span>
+                            <small>Segundos</small>
+                        </div>
+                    </div>
+                    <p class="frase-contador">
+                        Cada segundo ao seu lado valeu a pena 💚
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DO CARROSSEL DE MEMÓRIAS -->
+        <section class="carrossel-section">
+            <h2 class="section-title">Nossas Memórias 📸</h2>
+            <div class="carrossel-wrapper">
+                <button class="seta-btn prev" id="prev" aria-label="Foto anterior">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                
+                <div class="carrossel" id="carrosselContainer">
+                    <button id="playBtn" class="play-fixo" aria-label="Abrir Memory Player">
+                        <img src="start.png" alt="Play">
+                    </button>
+                    <div class="track" id="track"></div>
+                </div>
+
+                <button class="seta-btn next" id="next" aria-label="Próxima foto">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="indicadores" id="indicadores"></div>
+        </section>
+
+        <!-- SEÇÃO: ESCUTE QUANDO... -->
+        <section class="escute-quando-section">
+            <h2 class="section-title">Escute quando... 🎧</h2>
+            <div class="escute-quando-grid">
+                
+                <!-- Caixa 1 -->
+                <div class="escute-card">
+                    <div class="escute-foto-container">
+                        <img src="FOTOS/2_HERHOUSE.jpg" class="escute-foto escute-foto-apresentacao" alt="Apresentação">
+                    </div>
+                    <div class="escute-info">
+                        <h3 class="escute-card-title">Apresentação</h3>
+                        <a href="https://open.spotify.com/episode/5YFdZ8rV229zLiJphjdCrM?si=JIlcd3RGSN-U51ASsuutCA" target="_blank" rel="noopener noreferrer" class="escute-btn">Clique aqui</a>
+                    </div>
+                </div>
+
+                <!-- Caixa 2 -->
+                <div class="escute-card">
+                    <div class="escute-foto-container">
+                        <img src="FOTOS/33_EXPO26.jpg" class="escute-foto escute-foto-dormir" alt="Não conseguir dormir">
+                    </div>
+                    <div class="escute-info">
+                        <h3 class="escute-card-title">Não conseguir dormir</h3>
+                        <a href="https://open.spotify.com/episode/5qShTNayyZgJHNkPGYdlEi?si=WhNVufFDRLW5d9Tchahx1Q" target="_blank" rel="noopener noreferrer" class="escute-btn">Clique aqui</a>
+                    </div>
+                </div>
+
+                <!-- Caixa 3 -->
+                <div class="escute-card">
+                    <div class="escute-foto-container">
+                        <img src="FOTOS/22_15ANOS.jpg" class="escute-foto escute-foto-medo" alt="Sentir medo (de não dar conta)">
+                    </div>
+                    <div class="escute-info">
+                        <h3 class="escute-card-title">Sentir medo (de não dar conta)</h3>
+                        <a href="https://open.spotify.com/episode/4vVleRTiffZKfM2pzZ5f5G?si=aN45o54uRA62IrFdN2aFjg" target="_blank" rel="noopener noreferrer" class="escute-btn">Clique aqui</a>
+                    </div>
+                </div>
+
+                <!-- Caixa 4 -->
+                <div class="escute-card">
+                    <div class="escute-foto-container">
+                        <img src="FOTOS/10_ALIANÇA.jpg" class="escute-foto escute-foto-saudades" alt="Sentir saudades (Crítico)">
+                    </div>
+                    <div class="escute-info">
+                        <h3 class="escute-card-title">Sentir saudades (Crítico)</h3>
+                        <a href="https://open.spotify.com/episode/5RXoZIEh2klDQofJF4dSLF?si=5-EBgmN7TriQ54Z0Wk0PLw" target="_blank" rel="noopener noreferrer" class="escute-btn">Clique aqui</a>
+                    </div>
+                </div>
+
+                <!-- Caixa 5 -->
+                <div class="escute-card">
+                    <div class="escute-foto-container">
+                        <img src="FOTOS/21_SESSÃOFOTOS.jpg" class="escute-foto escute-foto-feliz" alt="Se sentir feliz">
+                    </div>
+                    <div class="escute-info">
+                        <h3 class="escute-card-title">Se sentir feliz</h3>
+                        <a href="https://open.spotify.com/episode/5BBIAq7lfpRmFND4RIq9kP?si=rJ8faP7WR9aYEYH2ZFRX7Q" target="_blank" rel="noopener noreferrer" class="escute-btn">Clique aqui</a>
+                    </div>
+                </div>
+
+                <!-- Caixa 6 -->
+                <div class="escute-card">
+                    <div class="escute-foto-container">
+                        <img src="FOTOS/18_CASAMENTOLUCAS.jpg" class="escute-foto escute-foto-triste" alt="Se sentir triste">
+                    </div>
+                    <div class="escute-info">
+                        <h3 class="escute-card-title">Se sentir triste</h3>
+                        <a href="https://open.spotify.com/episode/6iWgJKyYmRRQaBq9vFjSKL?si=ZmwdowHrQQqdhwTYbjfGcQ" target="_blank" rel="noopener noreferrer" class="escute-btn">Clique aqui</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- MODAL DO PLAYER DE MÚSICA (ESTILO SPOTIFY PREMIUM NOW PLAYING) -->
+    <div id="playerModal" class="player-modal">
+        <div class="player-card">
+            <button id="fecharPlayer" class="fechar-player" aria-label="Fechar Player">✕</button>
+            
+            <div class="player-cover-container">
+                <img id="playerFoto" src="" class="player-foto" alt="Foto da Memória">
+            </div>
+            
+            <div class="player-info">
+                <h2 id="playerTitulo" class="player-track-name">Memória</h2>
+                <p id="playerTexto" class="player-track-desc">Texto explicativo da memória...</p>
+            </div>
+
+            <!-- Player de Áudio Real -->
+            <audio id="audioPlayer" loop>
+                <source src="beijo de boas vindas .mp3" type="audio/mpeg">
+            </audio>
+
+            <!-- Barra de Progresso do Player -->
+            <div class="player-progress-bar-container">
+                <span id="tempoAtual" class="time-label">0:00</span>
+                <div class="progress-bar-track" id="barraProgresso">
+                    <div class="progress-bar-fill" id="progressoAtivo"></div>
+                </div>
+                <span id="tempoTotal" class="time-label">0:00</span>
+            </div>
+
+            <!-- Controles de Reprodução -->
+            <div class="player-controles">
+                <button id="anteriorBtn" class="control-btn prev-btn" aria-label="Música anterior">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                </button>
+                <button id="playPauseBtn" class="control-btn play-btn-circle" aria-label="Reproduzir / Pausar">
+                    <svg viewBox="0 0 24 24" fill="black" width="24" height="24" id="modalPlayIcon">
+                        <polygon points="8,5 19,12 8,19" id="modalPlaySvg"></polygon>
+                        <rect x="6" y="5" width="4" height="14" class="hidden" id="modalPause1"></rect>
+                        <rect x="14" y="5" width="4" height="14" class="hidden" id="modalPause2"></rect>
+                    </svg>
+                </button>
+                <button id="proximoBtn" class="control-btn next-btn" aria-label="Próxima música">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6zm9-12h2v12h-2z"/></svg>
+                </button>
+            </div>
+
+            <!-- Volume Slider -->
+            <div class="player-volume-container">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="volume-icon">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+                <div class="volume-bar-track" id="volumeBar">
+                    <div class="volume-bar-fill" id="volumeAtivo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
